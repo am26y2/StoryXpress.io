@@ -23,6 +23,9 @@ sql.connect(config, function (err) {
 });
 var request = new sql.Request();
 app.get("/",(req, res) => {
+  res.send("Hello from server.!!");
+});
+app.get("/movies",(req, res) => {
   request.query("select * from movies", function (err, recordset) {
     if (err) console.log(err);
     res.json(recordset);
