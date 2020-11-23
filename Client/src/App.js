@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./index.css";
-import axios from "axios";
+//import axios from "axios";
 import YearPicker from "react-year-picker";
 
 export default function App() {
   const [start, setStart] = useState(2016);
-  const apiurl = `localhost:4000`;
   useEffect(() => {
     async function getData() {
-      const res = await axios.get(apiurl);
+      const res = await fetch('/localhost:4000');
+      const data=res.json();
       console.log(res);
     }
     getData();
@@ -20,8 +20,8 @@ export default function App() {
   return (
     <div className="center">
       <div className="row">
-        <YearPicker onChange={handleChange} value={start} />
-        <YearPicker onChange={handleChange} value={start} />
+    <YearPicker onChange={handleChange} value={start} />
+    <YearPicker onChange={handleChange} value={start} /> 
       </div>
       <div>
         <button>submit</button>
