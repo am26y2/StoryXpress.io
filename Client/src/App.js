@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./index.css";
 //import axios from "axios";
-import Yearpicker from "./Yearpicker";
-
-import "./styles.css";
-
+import Yearpicker from "./Component/Yearpicker";
+import SimpleCard from "./Component/SimpleCard";
+import { Box } from "@material-ui/core";
 export default function App() {
   const [start, setStart] = useState(new Date().getFullYear() - 50);
+  const modifydata=[];
+  const [match, setMatch] = useState([]);
   const [end, setEnd] = useState(2020);
   const [startOpen, setstartOpen] = React.useState(false);
   const [endOpen, setendOpen] = React.useState(false);
@@ -15,10 +16,23 @@ export default function App() {
     else setendOpen(false);
   };
   useEffect(() => {
-    async function getData() {
-      const res = await fetch('/localhost:4000');
-      const data=res.json();
-      console.log(res);
+    var data;
+    const  getData=async ()=> {
+      const res = fetch('http://localhost:4000/').then(res=>res.json())
+      .then(res=>{
+        data=res.recordset;
+        // console.log(data);
+        //  console.log(res.recordset)
+         for (let i = 0; i < data.length; i++) {
+          //  console.log(data[i].movieId,data[i].title,data[i].genres);
+          modifydata.push({
+            movieId:data[i].movieId,
+            title:data[i].title,
+            genres:data[i].genres
+          });
+        }
+        
+      }).then(setMatch(modifydata)).catch(err=>console.log("error occure"));
     }
     getData();
   }, []);
@@ -32,6 +46,10 @@ export default function App() {
     if (id === `start`) setStart(value);
     if (id === `end`) setEnd(value);
   };
+  const handleSubmit=()=>{
+    console.log(match);
+    // console.log(modifydata);
+  }
   return (
     <div className="App">
       <div className="row">
@@ -54,7 +72,11 @@ export default function App() {
           handleClose={handleClose}
         />
       </div>
-      <button>submit</button>
+      <button onClick={handleSubmit}>submit</button>
+      
+      {match.map((el)=>(
+        <Box>Hello Gaurav</Box>
+      ))}
     </div>
   );
 }

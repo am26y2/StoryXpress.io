@@ -23,9 +23,10 @@ sql.connect(config, function (err) {
 });
 var request = new sql.Request();
 app.get("/",(req, res) => {
-  request.query("select * from movies", function (err, recordset) {
+  request.query("select top 10 * from movies", function (err, recordset) {
     if (err) console.log(err);
-    res.json(recordset);
+    console.log(recordset);
+    res.send(recordset);
   });
 });
 app.listen(4000, () => {

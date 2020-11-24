@@ -1,19 +1,35 @@
-*{
-  box-sizing: border-box;
+.App {
+  font-family: sans-serif;
+  text-align: center;
 }
-.row{
+.row {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
-  margin: 20px;
 }
-.col{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+
+button {
+  display: inline-block;
+  padding: 10px 15px;
+  font-size: 18px;
+  margin: 20px 5px 5px 5px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: black;
+  background-color: lightgrey;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
 }
-.center{
-  align-items: center;
-text-align: center;
+
+button:hover {
+  background-color: white;
+}
+
+button:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
